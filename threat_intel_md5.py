@@ -3,7 +3,7 @@ from optparse import *
 import sys
 import os
 
-# Create a yaml file of blacklisted md5s to use with logstash's translate plugin
+# Create yaml file of blacklisted md5s to use with logstash's translate plugin
 # Allows you to track bad md5s using elastic stack
 def main(infile):
   outfile = "blacklisted_md5.txt"
