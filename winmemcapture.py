@@ -7,6 +7,7 @@ pwd = "doorman"
 
 from contextlib import contextmanager
 
+# Attach to network sahre
 @contextmanager
 def network_share_auth(share, user, pwd, drive_letter='P'):
 
@@ -21,6 +22,7 @@ def network_share_auth(share, user, pwd, drive_letter='P'):
    finally:
       os.system("NET USE %s: /DELETE" % drive_letter)
 
+# Get Ramcapture from share and upload to Windows node      
 def get_memtool(bitnumber='64bit'):
    if bitnumber == '64bit':
       with network_share_auth(share, user, pwd):
@@ -30,10 +32,12 @@ def get_memtool(bitnumber='64bit'):
           shutil.copyfile(r"P:\x64\msvcr110.dll", r"C:\msvcr110.dll")
           shutil.copyfile(r"P:\x64\ramcapturedriver.cat", r"C:\ramcapturedriver.cat")
 
+# Run ramcapture on Windows node            
 def run_memdump():
    output = check_output("c:\\RamCapture64.exe c:\\grr_memdump64.bin", shell=True)
    magic_return_str = "memdump output %s" % output
 
+# Upload memory dump from ramcapture to share
 def upload_memfile():
    with network_share_auth(share, user, pwd):
       sharename = r"P:\grr_memdump64.bin"
