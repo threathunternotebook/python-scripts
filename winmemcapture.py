@@ -2,12 +2,12 @@ from subprocess import check_output
 import shutil
 import os
 share = r"\\192.168.229.75\grrshare"
-user = r"\doorman"
-pwd = "doorman"
+user = r"\username"
+pwd = "password"
 
 from contextlib import contextmanager
 
-# Attach to network sahre
+# Attach to network share
 @contextmanager
 def network_share_auth(share, user, pwd, drive_letter='P'):
 
